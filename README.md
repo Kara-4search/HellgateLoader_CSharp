@@ -5,7 +5,7 @@ Blog link: working on it
 - Base on the original Hellgate project down below:
 	1. https://github.com/am0nsec/SharpHellsGate
 	2. https://github.com/am0nsec/HellsGate
-	And my other project down below:
+- And my other project down below:
 	1. [SysCall_ShellcodeLoader](https://github.com/Kara-4search/SysCall_ShellcodeLoad_Csharp)
 	2. [HookDetection](https://github.com/Kara-4search/HookDetection_CSharp)
 	3. [DInvoke_ShellcodeLoader](https://github.com/Kara-4search/DInvoke_shellcodeload_CSharp)
@@ -15,7 +15,7 @@ Blog link: working on it
 - Only tested it on Win10/x64 works fine.
 - For better understanding, you really need to read the PDF(https://vxug.fakedoma.in/papers/VXUG/Exclusive/HellsGate.pdf) from the original author.
 - Thanks to them I do learn a lot, during code this project.
-- Also, there is a little different here, Instead of read the syscall id from the memory, I read 24 bytes to be the syscall，
+- Also, there is a little different here, Instead of read the syscall id from the memory, I read 24 bytes as the syscall，
 	so you don‘t need to concat them again. I think that would be more convenient for me.
 - (From the PDF)This general usage code base self-resolves syscalls without the need for static elements. Additionally, this general usage code base makes zero function invocations to aggregate the syscalls themselves.
 - About how it works:
