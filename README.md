@@ -32,9 +32,9 @@ Blog link: working on it
 
 ## Usage
 1. Set the APIs name that you need in "SyscallTable.cs" ,In this case is:
-	        * v1.Name = "NtAllocateVirtualMemory";
-            * v2.Name = "NtCreateThreadEx";
-            * v3.Name = "NtWaitForSingleObject";
+* v1.Name = "NtAllocateVirtualMemory";
+* v2.Name = "NtCreateThreadEx";
+* v3.Name = "NtWaitForSingleObject";
 	![avatar](https://raw.githubusercontent.com/Kara-4search/ProjectPics/main/HellGateLoader_APIs.png)
 
 2. Set the shellcode in Program.cs, the default shellcode is a Calc.
