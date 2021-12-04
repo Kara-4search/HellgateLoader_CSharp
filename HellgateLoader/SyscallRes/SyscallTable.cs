@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Runtime.InteropServices;
 
 namespace HellgateLoader.SyscallRes
 {
@@ -31,6 +28,7 @@ namespace HellgateLoader.SyscallRes
         public struct APITableEntry
         {
             public string Name;
+            [MarshalAs(UnmanagedType.ByValArray, SizeConst = 24)]
             public byte[] syscall_byte;
         }
     }

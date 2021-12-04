@@ -1,19 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
-using HellgateLoader.SyscallRes;
 
 namespace HellgateLoader.SyscallRes
 {
     class SyscallFunctions
     {
 
-        private IntPtr MangedMethodAddress { get; set; } = IntPtr.Zero;
+        private IntPtr ManagedMethodAddress { get; set; } = IntPtr.Zero;
         private IntPtr UnmanagedMethodAddress { get; set; } = IntPtr.Zero;
         private object Mutant { get; set; } = new object();
 
@@ -30,26 +25,47 @@ namespace HellgateLoader.SyscallRes
             MethodInfo method = typeof(SyscallFunctions).GetMethod(nameof(Gate), BindingFlags.Static | BindingFlags.NonPublic);
             if (method == null)
             {
-                // Util.LogError("Unable to find the method");
+                Console.WriteLine("Unable to find the method");
                 return false;
             }
             RuntimeHelpers.PrepareMethod(method.MethodHandle);
-
+#if DEBUG
             // Get the address of the function and check if first opcode == JMP
             IntPtr pMethod = method.MethodHandle.GetFunctionPointer();
+            
+            Console.WriteLine($"\t[*] Relative Address: 0x{pMethod:X16}");
+            Console.Write($"{Marshal.ReadByte(pMethod, -1):X2} # ");
+            Console.Write($"{Marshal.ReadByte(pMethod, 0):X2}");
+            Console.Write($"{Marshal.ReadByte(pMethod, 1):X2}");
+            Console.Write($"{Marshal.ReadByte(pMethod, 2):X2}");
+            Console.Write($"{Marshal.ReadByte(pMethod, 3):X2}");
+            Console.Write($"{Marshal.ReadByte(pMethod, 4):X2}");
+            Console.Write($"{Marshal.ReadByte(pMethod, 5):X2}");
+            Console.Write($"{Marshal.ReadByte(pMethod, 6):X2}");
+            Console.Write($"{Marshal.ReadByte(pMethod, 7):X2}");
+            Console.Write($" # {Marshal.ReadByte(pMethod, 8):X2}");
+            
             if (Marshal.ReadByte(pMethod) != 0xe9)
-            {
+            {           
+                Console.WriteLine("Method was not JIT'ed or invalid stub");
                 return false;
             }
 
             // Get address of jited method and stack alignment 
             Int32 offset = Marshal.ReadInt32(pMethod, 1);
             UInt64 addr = (UInt64)pMethod + (UInt64)offset;
-            while (addr % 16 != 0)
-                addr++;
 
-            this.MangedMethodAddress = method.MethodHandle.GetFunctionPointer();
+            int count = 0;
+            while (addr % 16 != 0){
+                count++;
+                addr++;
+            }
+            Console.WriteLine("\nCount = " + count);
+        
             this.UnmanagedMethodAddress = (IntPtr)addr;
+# else
+            this.ManagedMethodAddress = method.MethodHandle.GetFunctionPointer();
+# endif
             return true;
         }
 
@@ -57,16 +73,25 @@ namespace HellgateLoader.SyscallRes
         {
             if (Syscall_byte.Length == 0)
             {
+                Console.WriteLine("Syscall byte is null");
                 return null;
             }
 
-            Marshal.Copy(Syscall_byte, 0, this.UnmanagedMethodAddress, Syscall_byte.Length);
-            return Marshal.GetDelegateForFunctionPointer<T>(this.UnmanagedMethodAddress);
+            IntPtr Desitnation_address = IntPtr.Zero;
+
+# if DEBUG
+            Desitnation_address = this.UnmanagedMethodAddress;
+# else
+            Desitnation_address = this.ManagedMethodAddress;
+# endif
+
+            Marshal.Copy(Syscall_byte, 0, Desitnation_address, Syscall_byte.Length);
+            return Marshal.GetDelegateForFunctionPointer<T>(Desitnation_address);
         }
 
         public UInt32 NtAllocateVirtualMemory(IntPtr ProcessHandle, ref IntPtr BaseAddress, IntPtr ZeroBits, ref IntPtr RegionSize, UInt32 AllocationType, UInt32 Protect)
         {
-            lock (Mutant)
+            lock (this.Mutant)
             {
                 byte[] syscall = new byte[24];
                 foreach (var temp in SyscallTable.Syscall_list)

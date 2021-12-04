@@ -1,0 +1,7 @@
+C:\Project\Projects\Project_HellgateLoader\HellgateLoader\HellgateLoader\bin\Debug\HellgateLoader.exe.config
+C:\Project\Projects\Project_HellgateLoader\HellgateLoader\HellgateLoader\bin\Debug\HellgateLoader.exe
+C:\Project\Projects\Project_HellgateLoader\HellgateLoader\HellgateLoader\bin\Debug\HellgateLoader.pdb
+C:\Project\Projects\Project_HellgateLoader\HellgateLoader\HellgateLoader\obj\Debug\HellgateLoader.csprojAssemblyReference.cache
+C:\Project\Projects\Project_HellgateLoader\HellgateLoader\HellgateLoader\obj\Debug\HellgateLoader.csproj.CoreCompileInputs.cache
+C:\Project\Projects\Project_HellgateLoader\HellgateLoader\HellgateLoader\obj\Debug\HellgateLoader.exe
+C:\Project\Projects\Project_HellgateLoader\HellgateLoader\HellgateLoader\obj\Debug\HellgateLoader.pdb

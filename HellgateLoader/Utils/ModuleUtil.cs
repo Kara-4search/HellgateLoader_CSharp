@@ -1,20 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using HellgateLoader.SyscallRes;
+using System;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using static HellgateLoader.NativeStructs;
-using static HellgateLoader.Utils.MemoryUtil;
-using HellgateLoader.SyscallRes;
 using static HellgateLoader.SyscallRes.SyscallTable;
+using static HellgateLoader.Utils.MemoryUtil;
 
 namespace HellgateLoader.Utils
 {
     class ModuleUtil
     {
-
 
         public static IMAGE_SECTION_HEADER[] GetSectionArray(
             MemoryStream ModuleStream,
@@ -125,8 +121,8 @@ namespace HellgateLoader.Utils
         }
 
         private static void SetSyscallBytes(
-            MemoryStream ModuleStream, 
-            IMAGE_EXPORT_DIRECTORY IMAGE_EXPORT_DIRECTORY_instance, 
+            MemoryStream ModuleStream,
+            IMAGE_EXPORT_DIRECTORY IMAGE_EXPORT_DIRECTORY_instance,
             IMAGE_SECTION_HEADER[] IMAGE_SECTION_HEADER_array)
         {
             Int64 AddressOfFunctions_offset = ConvertRvaToOffset(IMAGE_EXPORT_DIRECTORY_instance.AddressOfFunctions, IMAGE_SECTION_HEADER_array);
@@ -161,12 +157,12 @@ namespace HellgateLoader.Utils
                         Int64 AddressOfFunctions_single_offset = ConvertRvaToOffset(AddressOfFunctions_single_rva, IMAGE_SECTION_HEADER_array);
 
                         byte[] Syscall_byte = new byte[24];
-                        Syscall_byte = ReadSyscallFromSteam(ModuleStream, AddressOfFunctions_single_offset);
+                        Syscall_byte = ReadSyscallFromStream(ModuleStream, AddressOfFunctions_single_offset);
 
-                        APITableEntry api_ins = SyscallTable.Syscall_list[index];
-                        // api_ins.Name = Syscall_list[index].Name;
-                        api_ins.syscall_byte = Syscall_byte;
-                        SyscallTable.Syscall_list[index] = api_ins;
+                        APITableEntry APITableEntry_instance = SyscallTable.Syscall_list[index];
+                        APITableEntry_instance.Name = Syscall_list[index].Name;
+                        APITableEntry_instance.syscall_byte = Syscall_byte;
+                        SyscallTable.Syscall_list[index] = APITableEntry_instance;
 
                         for (int temp_num = 0; temp_num < Syscall_byte.Length; temp_num++)
                         {

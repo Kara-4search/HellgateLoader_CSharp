@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace HellgateLoader.Utils
 {
@@ -15,7 +13,7 @@ namespace HellgateLoader.Utils
             byte[] ModuleBlob = File.ReadAllBytes(ModulePath);
             if (ModuleBlob.Length == 0x00)
             {
-                Console.WriteLine($"Empty module content: " + ModulePath);
+                Console.WriteLine("Empty module content: " + ModulePath);
                 return null;
             }
 
@@ -61,7 +59,7 @@ namespace HellgateLoader.Utils
             return BitConverter.ToUInt32(s, 0);
         }
 
-        public static byte[] ReadSyscallFromSteam(MemoryStream ModuleStream, Int64 offset)
+        public static byte[] ReadSyscallFromStream(MemoryStream ModuleStream, Int64 offset)
         {
             byte[] s = new byte[24];
             ModuleStream.Seek(offset, SeekOrigin.Begin);
