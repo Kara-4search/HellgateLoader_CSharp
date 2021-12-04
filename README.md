@@ -46,7 +46,8 @@ Blog link: working on it
 - Restructure the code
 
 ## Update history
-- NONE
+- Fix bugs: cannot run normally after compile as release
+	* details update later
 
 ## Reference link:
 	1. https://github.com/am0nsec/HellsGate
