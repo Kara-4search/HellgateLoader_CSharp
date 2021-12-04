@@ -14,7 +14,7 @@ Blog link: working on it
 - **I make this project for learning purpose, use it at you own risk.**
 - Only tested it on Win10/x64 works fine.
 - For better understanding, you really need to read the PDF(https://vxug.fakedoma.in/papers/VXUG/Exclusive/HellsGate.pdf) from the original author.
-- Thanks to them I do learn a lot, during code this project.
+- Thanks to them I do learn a lot, during coding this project.
 - Also, there is a little different here, Instead of read the syscall id from the memory, I read 24 bytes as the syscall，
 	so you don‘t need to concat them again. I think that would be more convenient for me.
 - (From the PDF)This general usage code base self-resolves syscalls without the need for static elements. Additionally, this general usage code base makes zero function invocations to aggregate the syscalls themselves.
