@@ -1,7 +1,7 @@
 # HellgateLoader_CSharp
 
 Blog link: working on it
-
+- Rewrite hellgate with .net framework for learning purpose
 - Base on the original Hellgate project down below:
 	1. https://github.com/am0nsec/SharpHellsGate
 	2. https://github.com/am0nsec/HellsGate
@@ -46,8 +46,10 @@ Blog link: working on it
 - Restructure the code
 
 ## Update history
-- Fix bugs: cannot run normally after compile as release
-	* details update later
+- Fix bugs: cannot run normally after compile as release - 20211204
+	* JIT function address is different bitween DEBUG and RELEASE
+	* More details check the code in https://github.com/Kara-4search/JIT_DEMO_Csharp
+	
 
 ## Reference link:
 	1. https://github.com/am0nsec/HellsGate
