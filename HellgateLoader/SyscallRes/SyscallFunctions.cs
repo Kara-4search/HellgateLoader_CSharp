@@ -33,7 +33,7 @@ namespace HellgateLoader.SyscallRes
             // Get the address of the function and check if first opcode == JMP
             IntPtr pMethod = method.MethodHandle.GetFunctionPointer();
             
-            Console.WriteLine($"\t[*] Relative Address: 0x{pMethod:X16}");
+            Console.WriteLine($"\t[*] Relative Address: 0x{pMethod.ToInt64():X16}");
             Console.Write($"{Marshal.ReadByte(pMethod, -1):X2} # ");
             Console.Write($"{Marshal.ReadByte(pMethod, 0):X2}");
             Console.Write($"{Marshal.ReadByte(pMethod, 1):X2}");
