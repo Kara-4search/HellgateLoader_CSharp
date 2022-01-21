@@ -49,6 +49,7 @@ Blog link: working on it
 - Fix bugs: cannot run normally after compile as release - 20211204
 	* JIT function address is different bitween DEBUG and RELEASE
 	* More details check the code in https://github.com/Kara-4search/JIT_DEMO_Csharp
+- Fix bugs: pMethod's address print with wrong format - 20220121
 	
 
 ## Reference link:
